@@ -1,0 +1,395 @@
+
+BluetoothMashin.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001ce  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000004  00800060  000001ce  00000242  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000246  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000278  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000038  00000000  00000000  000002b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000756  00000000  00000000  000002ec  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 0000056c  00000000  00000000  00000a42  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   000003dc  00000000  00000000  00000fae  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000064  00000000  00000000  0000138c  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    000003a2  00000000  00000000  000013f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000001ec  00000000  00000000  00001792  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000028  00000000  00000000  0000197e  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	24 c0       	rjmp	.+72     	; 0x4c <__bad_interrupt>
+   4:	23 c0       	rjmp	.+70     	; 0x4c <__bad_interrupt>
+   6:	22 c0       	rjmp	.+68     	; 0x4c <__bad_interrupt>
+   8:	21 c0       	rjmp	.+66     	; 0x4c <__bad_interrupt>
+   a:	20 c0       	rjmp	.+64     	; 0x4c <__bad_interrupt>
+   c:	1f c0       	rjmp	.+62     	; 0x4c <__bad_interrupt>
+   e:	1e c0       	rjmp	.+60     	; 0x4c <__bad_interrupt>
+  10:	1d c0       	rjmp	.+58     	; 0x4c <__bad_interrupt>
+  12:	1c c0       	rjmp	.+56     	; 0x4c <__bad_interrupt>
+  14:	1b c0       	rjmp	.+54     	; 0x4c <__bad_interrupt>
+  16:	2e c0       	rjmp	.+92     	; 0x74 <__vector_11>
+  18:	19 c0       	rjmp	.+50     	; 0x4c <__bad_interrupt>
+  1a:	18 c0       	rjmp	.+48     	; 0x4c <__bad_interrupt>
+  1c:	17 c0       	rjmp	.+46     	; 0x4c <__bad_interrupt>
+  1e:	16 c0       	rjmp	.+44     	; 0x4c <__bad_interrupt>
+  20:	15 c0       	rjmp	.+42     	; 0x4c <__bad_interrupt>
+  22:	14 c0       	rjmp	.+40     	; 0x4c <__bad_interrupt>
+  24:	13 c0       	rjmp	.+38     	; 0x4c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	ee ec       	ldi	r30, 0xCE	; 206
+  3a:	f1 e0       	ldi	r31, 0x01	; 1
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a4 36       	cpi	r26, 0x64	; 100
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+  48:	2d d0       	rcall	.+90     	; 0xa4 <main>
+  4a:	bf c0       	rjmp	.+382    	; 0x1ca <_exit>
+
+0000004c <__bad_interrupt>:
+  4c:	d9 cf       	rjmp	.-78     	; 0x0 <__vectors>
+
+0000004e <_Z9port_initv>:
+
+//Ќј„јЋ№Ќјя »Ќ»÷»јЋ»«ј÷»я ѕќ–“ќ¬ ”ѕ–ј¬Ћ≈Ќ»я ћќ“ќ–јћ» » —≈–¬ќѕ–»¬ќƒќћ
+void port_init()
+{
+	//инициализаци€ портов управлени€ двигател€ми
+	DDRC |=(1<<0);// правый вперЄд
+  4e:	a0 9a       	sbi	0x14, 0	; 20
+	DDRC |=(1<<1);// правый назад
+  50:	a1 9a       	sbi	0x14, 1	; 20
+	DDRC |=(1<<2);//левый вперЄд
+  52:	a2 9a       	sbi	0x14, 2	; 20
+	DDRC |=(1<<3);// левый назад
+  54:	a3 9a       	sbi	0x14, 3	; 20
+	
+	//установка начальных значений - все двигатели сто€т
+	PORTC |=(0<<0);
+  56:	85 b3       	in	r24, 0x15	; 21
+  58:	85 bb       	out	0x15, r24	; 21
+	PORTC |=(0<<1);
+  5a:	85 b3       	in	r24, 0x15	; 21
+  5c:	85 bb       	out	0x15, r24	; 21
+	PORTC |=(0<<2);
+  5e:	85 b3       	in	r24, 0x15	; 21
+  60:	85 bb       	out	0x15, r24	; 21
+	PORTC |=(0<<3);
+  62:	85 b3       	in	r24, 0x15	; 21
+  64:	85 bb       	out	0x15, r24	; 21
+	
+	//инициализаци€ ходовых задних огней
+	DDRC |= (1<<4);
+  66:	a4 9a       	sbi	0x14, 4	; 20
+	DDRC |= (1<<5);
+  68:	a5 9a       	sbi	0x14, 5	; 20
+	PORTC &=(0<<4);
+  6a:	85 b3       	in	r24, 0x15	; 21
+  6c:	15 ba       	out	0x15, r1	; 21
+	PORTC &=(0<<5);
+  6e:	85 b3       	in	r24, 0x15	; 21
+  70:	15 ba       	out	0x15, r1	; 21
+  72:	08 95       	ret
+
+00000074 <__vector_11>:
+}
+
+//ќЅ–јЅќ“„»  ѕ–≈–џ¬јЌ»я
+ISR(USART_RXC_vect)
+{	
+  74:	1f 92       	push	r1
+  76:	0f 92       	push	r0
+  78:	0f b6       	in	r0, 0x3f	; 63
+  7a:	0f 92       	push	r0
+  7c:	11 24       	eor	r1, r1
+  7e:	8f 93       	push	r24
+	temp2 = UDR;	
+  80:	8c b1       	in	r24, 0x0c	; 12
+  82:	80 93 61 00 	sts	0x0061, r24	; 0x800061 <temp2>
+}
+  86:	8f 91       	pop	r24
+  88:	0f 90       	pop	r0
+  8a:	0f be       	out	0x3f, r0	; 63
+  8c:	0f 90       	pop	r0
+  8e:	1f 90       	pop	r1
+  90:	18 95       	reti
+
+00000092 <_Z8InitUARTv>:
+
+//»Ќ»÷»јЋ»«ј÷»я UART
+void InitUART(void)
+{
+	UCSRB = 0b00011000;
+  92:	88 e1       	ldi	r24, 0x18	; 24
+  94:	8a b9       	out	0x0a, r24	; 10
+	UCSRB |=(1<<RXCIE);
+  96:	57 9a       	sbi	0x0a, 7	; 10
+	UCSRC = 0b10000011;
+  98:	83 e8       	ldi	r24, 0x83	; 131
+  9a:	80 bd       	out	0x20, r24	; 32
+	UBRRH=(BAUD_PRESCALE>>8);
+  9c:	10 bc       	out	0x20, r1	; 32
+	UBRRL=BAUD_PRESCALE;
+  9e:	83 e3       	ldi	r24, 0x33	; 51
+  a0:	89 b9       	out	0x09, r24	; 9
+  a2:	08 95       	ret
+
+000000a4 <main>:
+// √лавна€ программа
+//------------------------------------------------------------------------------
+int main(void)
+{
+	//‘ункции начальной инициализации
+	port_init();
+  a4:	d4 df       	rcall	.-88     	; 0x4e <_Z9port_initv>
+	InitUART();
+  a6:	f5 df       	rcall	.-22     	; 0x92 <_Z8InitUARTv>
+			
+	sei();// разршаем прерывани€
+  a8:	78 94       	sei
+	
+	// бесконечный цикл
+	while(1) 
+	{
+				
+		if(temp1 != temp2)//выполн§ем действие только в том случае, если текуща€ команда друга€
+  aa:	90 91 62 00 	lds	r25, 0x0062	; 0x800062 <temp1>
+  ae:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <temp2>
+  b2:	98 17       	cp	r25, r24
+  b4:	d1 f3       	breq	.-12     	; 0xaa <main+0x6>
+		{
+			
+			switch(braker)
+  b6:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__data_start>
+  ba:	80 33       	cpi	r24, 0x30	; 48
+  bc:	21 f0       	breq	.+8      	; 0xc6 <main+0x22>
+  be:	81 33       	cpi	r24, 0x31	; 49
+  c0:	09 f4       	brne	.+2      	; 0xc4 <main+0x20>
+  c2:	5b c0       	rjmp	.+182    	; 0x17a <main+0xd6>
+  c4:	f2 cf       	rjmp	.-28     	; 0xaa <main+0x6>
+			{
+			
+			//нет ручника
+			case '0':	
+			switch(temp2)
+  c6:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <temp2>
+  ca:	93 33       	cpi	r25, 0x33	; 51
+  cc:	09 f4       	brne	.+2      	; 0xd0 <main+0x2c>
+  ce:	49 c0       	rjmp	.+146    	; 0x162 <main+0xbe>
+  d0:	18 f4       	brcc	.+6      	; 0xd8 <main+0x34>
+  d2:	92 33       	cpi	r25, 0x32	; 50
+  d4:	79 f1       	breq	.+94     	; 0x134 <main+0x90>
+  d6:	4c c0       	rjmp	.+152    	; 0x170 <main+0xcc>
+  d8:	95 33       	cpi	r25, 0x35	; 53
+  da:	b1 f0       	breq	.+44     	; 0x108 <main+0x64>
+  dc:	98 33       	cpi	r25, 0x38	; 56
+  de:	09 f0       	breq	.+2      	; 0xe2 <main+0x3e>
+  e0:	47 c0       	rjmp	.+142    	; 0x170 <main+0xcc>
+			{
+				case '8'://движение вперЄд
+				PORTC &=(0<<0);//выключаем задний ход
+  e2:	85 b3       	in	r24, 0x15	; 21
+  e4:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<2);
+  e6:	85 b3       	in	r24, 0x15	; 21
+  e8:	15 ba       	out	0x15, r1	; 21
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  ea:	8f e4       	ldi	r24, 0x4F	; 79
+  ec:	93 ec       	ldi	r25, 0xC3	; 195
+  ee:	01 97       	sbiw	r24, 0x01	; 1
+  f0:	f1 f7       	brne	.-4      	; 0xee <main+0x4a>
+  f2:	00 c0       	rjmp	.+0      	; 0xf4 <main+0x50>
+  f4:	00 00       	nop
+				_delay_ms(25);// выжидаем скачок
+				PORTC |=(1<<1);//включаем передний ход
+  f6:	a9 9a       	sbi	0x15, 1	; 21
+				PORTC |=(1<<3);
+  f8:	ab 9a       	sbi	0x15, 3	; 21
+  fa:	8f e4       	ldi	r24, 0x4F	; 79
+  fc:	93 ec       	ldi	r25, 0xC3	; 195
+  fe:	01 97       	sbiw	r24, 0x01	; 1
+ 100:	f1 f7       	brne	.-4      	; 0xfe <main+0x5a>
+ 102:	00 c0       	rjmp	.+0      	; 0x104 <main+0x60>
+ 104:	00 00       	nop
+ 106:	34 c0       	rjmp	.+104    	; 0x170 <main+0xcc>
+				_delay_ms(25);//выжидаем скачок
+				break;
+				
+			    case '5':	//стоп
+				PORTC &=(0<<0);//выключаем все двигатели
+ 108:	85 b3       	in	r24, 0x15	; 21
+ 10a:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<2);
+ 10c:	85 b3       	in	r24, 0x15	; 21
+ 10e:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<1);
+ 110:	85 b3       	in	r24, 0x15	; 21
+ 112:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<3);
+ 114:	85 b3       	in	r24, 0x15	; 21
+ 116:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<4);
+ 118:	85 b3       	in	r24, 0x15	; 21
+ 11a:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<5);
+ 11c:	85 b3       	in	r24, 0x15	; 21
+ 11e:	15 ba       	out	0x15, r1	; 21
+ 120:	9f e7       	ldi	r25, 0x7F	; 127
+ 122:	28 e3       	ldi	r18, 0x38	; 56
+ 124:	81 e0       	ldi	r24, 0x01	; 1
+ 126:	91 50       	subi	r25, 0x01	; 1
+ 128:	20 40       	sbci	r18, 0x00	; 0
+ 12a:	80 40       	sbci	r24, 0x00	; 0
+ 12c:	e1 f7       	brne	.-8      	; 0x126 <main+0x82>
+ 12e:	00 c0       	rjmp	.+0      	; 0x130 <main+0x8c>
+ 130:	00 00       	nop
+ 132:	1e c0       	rjmp	.+60     	; 0x170 <main+0xcc>
+				_delay_ms(50);// выжидаем скачок
+				break;
+				
+				case '2': //движение назад
+				PORTC &=(0<<1);//выключаем передний ход
+ 134:	85 b3       	in	r24, 0x15	; 21
+ 136:	15 ba       	out	0x15, r1	; 21
+				PORTC |=(1<<4);
+ 138:	ac 9a       	sbi	0x15, 4	; 21
+				PORTC |=(1<<5);
+ 13a:	ad 9a       	sbi	0x15, 5	; 21
+				PORTC &=(0<<3);
+ 13c:	85 b3       	in	r24, 0x15	; 21
+ 13e:	15 ba       	out	0x15, r1	; 21
+ 140:	8f e4       	ldi	r24, 0x4F	; 79
+ 142:	93 ec       	ldi	r25, 0xC3	; 195
+ 144:	01 97       	sbiw	r24, 0x01	; 1
+ 146:	f1 f7       	brne	.-4      	; 0x144 <main+0xa0>
+ 148:	00 c0       	rjmp	.+0      	; 0x14a <main+0xa6>
+ 14a:	00 00       	nop
+				_delay_ms(25);// выжидаем скачок
+				PORTC |=(1<<0);//включаем задний ход
+ 14c:	a8 9a       	sbi	0x15, 0	; 21
+				PORTC |=(1<<2);
+ 14e:	aa 9a       	sbi	0x15, 2	; 21
+				PORTC |=(1<<4);
+ 150:	ac 9a       	sbi	0x15, 4	; 21
+				PORTC |=(1<<5);
+ 152:	ad 9a       	sbi	0x15, 5	; 21
+ 154:	8f e4       	ldi	r24, 0x4F	; 79
+ 156:	93 ec       	ldi	r25, 0xC3	; 195
+ 158:	01 97       	sbiw	r24, 0x01	; 1
+ 15a:	f1 f7       	brne	.-4      	; 0x158 <main+0xb4>
+ 15c:	00 c0       	rjmp	.+0      	; 0x15e <main+0xba>
+ 15e:	00 00       	nop
+ 160:	07 c0       	rjmp	.+14     	; 0x170 <main+0xcc>
+				_delay_ms(25);// выжидаем скачок
+				break;
+				
+				case '3':
+				braker =char(int(!(bool(char(braker)-48)))+48);
+ 162:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__data_start>
+ 166:	90 33       	cpi	r25, 0x30	; 48
+ 168:	09 f4       	brne	.+2      	; 0x16c <main+0xc8>
+ 16a:	81 e3       	ldi	r24, 0x31	; 49
+ 16c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
+				break;
+		
+			}
+			temp1=temp2;//сохран€ем текущее значение дл€ сравнени€
+ 170:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <temp2>
+ 174:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <temp1>
+			break;
+ 178:	98 cf       	rjmp	.-208    	; 0xaa <main+0x6>
+			
+			//есть ручник
+			case '1':
+			switch(temp2)
+ 17a:	90 91 61 00 	lds	r25, 0x0061	; 0x800061 <temp2>
+ 17e:	93 33       	cpi	r25, 0x33	; 51
+ 180:	c1 f0       	breq	.+48     	; 0x1b2 <main+0x10e>
+ 182:	95 33       	cpi	r25, 0x35	; 53
+ 184:	e9 f4       	brne	.+58     	; 0x1c0 <main+0x11c>
+			{
+				case '5':	//стоп
+				PORTC &=(0<<0);//выключаем все двигатели
+ 186:	85 b3       	in	r24, 0x15	; 21
+ 188:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<2);
+ 18a:	85 b3       	in	r24, 0x15	; 21
+ 18c:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<1);
+ 18e:	85 b3       	in	r24, 0x15	; 21
+ 190:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<3);
+ 192:	85 b3       	in	r24, 0x15	; 21
+ 194:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<4);
+ 196:	85 b3       	in	r24, 0x15	; 21
+ 198:	15 ba       	out	0x15, r1	; 21
+				PORTC &=(0<<5);
+ 19a:	85 b3       	in	r24, 0x15	; 21
+ 19c:	15 ba       	out	0x15, r1	; 21
+ 19e:	9f e7       	ldi	r25, 0x7F	; 127
+ 1a0:	28 e3       	ldi	r18, 0x38	; 56
+ 1a2:	81 e0       	ldi	r24, 0x01	; 1
+ 1a4:	91 50       	subi	r25, 0x01	; 1
+ 1a6:	20 40       	sbci	r18, 0x00	; 0
+ 1a8:	80 40       	sbci	r24, 0x00	; 0
+ 1aa:	e1 f7       	brne	.-8      	; 0x1a4 <main+0x100>
+ 1ac:	00 c0       	rjmp	.+0      	; 0x1ae <main+0x10a>
+ 1ae:	00 00       	nop
+ 1b0:	07 c0       	rjmp	.+14     	; 0x1c0 <main+0x11c>
+				_delay_ms(50);// выжидаем скачок
+				break;
+				
+				case '3':
+				braker =char(int(!(bool(char(braker)-48)))+48);
+ 1b2:	90 91 60 00 	lds	r25, 0x0060	; 0x800060 <__data_start>
+ 1b6:	90 33       	cpi	r25, 0x30	; 48
+ 1b8:	09 f0       	breq	.+2      	; 0x1bc <main+0x118>
+ 1ba:	80 e3       	ldi	r24, 0x30	; 48
+ 1bc:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__data_start>
+				break;
+			}
+			temp1=temp2;//сохран€ем текущее значение дл€ сравнени€
+ 1c0:	80 91 61 00 	lds	r24, 0x0061	; 0x800061 <temp2>
+ 1c4:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <temp1>
+			break;
+ 1c8:	70 cf       	rjmp	.-288    	; 0xaa <main+0x6>
+
+000001ca <_exit>:
+ 1ca:	f8 94       	cli
+
+000001cc <__stop_program>:
+ 1cc:	ff cf       	rjmp	.-2      	; 0x1cc <__stop_program>

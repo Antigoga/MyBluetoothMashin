@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Bluetooth_Interface_Example</string>
+    <string name="connect">Connect</string>
+</resources>
